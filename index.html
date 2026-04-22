@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symbols в JS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/theme/black.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/plugin/highlight/monokai.min.css">
+    <style>
+        .reveal h1,
+        .reveal h2,
+        .reveal h3 {
+            text-transform: none;
+        }
+
+        .reveal pre code {
+            font-size: 0.85em;
+            line-height: 1.3;
+        }
+
+        .reveal table {
+            font-size: 0.75em;
+        }
+
+        .reveal table th,
+        .reveal table td {
+            padding: 0.3em 0.6em;
+            border: 1px solid #555;
+        }
+
+        .reveal .highlight {
+            color: #42affa;
+        }
+
+        .reveal .two-columns {
+            display: flex;
+            gap: 2em;
+        }
+
+        .reveal .two-columns>* {
+            flex: 1;
+        }
+
+        .small-code pre code {
+            font-size: 0.7em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+
+            </section>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/plugin/highlight/highlight.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: true,
+            plugins: [RevealHighlight()]
+        });
+    </script>
+</body>
+
+</html>
