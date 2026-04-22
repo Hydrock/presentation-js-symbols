@@ -54,8 +54,212 @@
     <div class="reveal">
         <div class="slides">
             <section>
+    <h1>Symbols в JavaScript</h1>
+    <p>Техническая презентация для middle+ / senior разработчиков</p>
+</section>
 
-            </section>
+<section>
+    <h2>1. Введение: зачем вообще Symbol</h2>
+    <ul>
+        <li>Проблема коллизий ключей в объектах</li>
+        <li>Ограничения строковых ключей</li>
+        <li>Исторический контекст (ES6)</li>
+    </ul>
+    <pre><code class="javascript">const obj = { id: 1 };
+obj.id = 2; // перезаписали</code></pre>
+    <p><strong>Подводка:</strong> А что если нужно гарантированно уникальное свойство?</p>
+</section>
+
+<section>
+    <h2>2. Что такое Symbol</h2>
+    <ul>
+        <li>Примитивный тип (не объект!)</li>
+        <li>Уникальность по определению</li>
+        <li>Невозможность неявного преобразования в строку</li>
+    </ul>
+    <pre><code class="javascript">const s1 = Symbol('id');
+const s2 = Symbol('id');
+console.log(s1 === s2); // false</code></pre>
+</section>
+
+<section>
+    <h2>3. Основные свойства Symbol</h2>
+    <ul>
+        <li>Уникальность</li>
+        <li>Не перечисляется в обычных циклах (for...in, Object.keys)</li>
+        <li>Используется как ключ объекта</li>
+    </ul>
+    <pre><code class="javascript">const key = Symbol('secret');
+const obj = {
+  [key]: 123
+};</code></pre>
+</section>
+
+<section>
+    <h2>4. Symbol как способ скрытия данных</h2>
+    <ul>
+        <li>"Псевдо-приватные" поля</li>
+        <li>Почему это не полноценный private</li>
+    </ul>
+    <pre><code class="javascript">const secret = Symbol();
+const user = {
+  name: 'Aleksei',
+  [secret]: 'hidden'
+};
+
+// Но:
+Object.getOwnPropertySymbols(user); // можно достать</code></pre>
+</section>
+
+<section>
+    <h2>5. Глобальный реестр символов</h2>
+    <ul>
+        <li>Symbol.for</li>
+        <li>Symbol.keyFor</li>
+        <li>Когда нужен shared symbol</li>
+    </ul>
+    <pre><code class="javascript">const s1 = Symbol.for('id');
+const s2 = Symbol.for('id');
+console.log(s1 === s2); // true
+
+// Контраст:
+// Symbol() → всегда новый
+// Symbol.for() → из реестра</code></pre>
+</section>
+
+<section>
+    <h2>6. Встроенные символы (well-known symbols)</h2>
+    <p><strong>Ключевая часть доклада</strong></p>
+    <ul>
+        <li>Symbol.iterator</li>
+        <li>Symbol.toPrimitive</li>
+        <li>Symbol.toStringTag</li>
+        <li>Symbol.hasInstance</li>
+        <li>Symbol.species</li>
+        <li>Symbol.match / replace / search / split</li>
+    </ul>
+</section>
+
+<section>
+    <h2>7. Переопределение поведения языка</h2>
+</section>
+
+<section>
+    <h2>7.1 Symbol.iterator</h2>
+    <pre><code class="javascript">const obj = {
+  *[Symbol.iterator]() {
+    yield 1;
+    yield 2;
+  }
+};</code></pre>
+</section>
+
+<section>
+    <h2>7.2 Symbol.toPrimitive</h2>
+    <p><strong>Когда вызывается:</strong></p>
+    <ul>
+        <li>+obj</li>
+        <li>${obj}</li>
+        <li>obj == 1</li>
+    </ul>
+    <pre><code class="javascript">const obj = {
+  [Symbol.toPrimitive](hint) {
+    if (hint === 'number') return 42;
+    return 'hello';
+  }
+};</code></pre>
+</section>
+
+<section>
+    <h2>7.3 Symbol.toStringTag</h2>
+    <pre><code class="javascript">const obj = {
+  [Symbol.toStringTag]: 'CustomObject'
+};
+Object.prototype.toString.call(obj);
+// [object CustomObject]</code></pre>
+</section>
+
+<section>
+    <h2>8. Symbols в реальных библиотеках</h2>
+    <ul>
+        <li><strong>React</strong> - использует $$typeof (Symbol) для определения элементов</li>
+        <li><strong>Node.js</strong> - util.inspect.custom (Symbol)</li>
+        <li><strong>Redux</strong> - internal action types</li>
+    </ul>
+</section>
+
+<section>
+    <h2>9. Когда использовать Symbol</h2>
+    <div class="two-columns">
+        <div>
+            <h3>✅ Хорошо подходит:</h3>
+            <ul>
+                <li>уникальные ключи</li>
+                <li>внутренние API</li>
+                <li>мета-программирование</li>
+                <li>расширение поведения языка</li>
+            </ul>
+        </div>
+        <div>
+            <h3>❌ Плохо подходит:</h3>
+            <ul>
+                <li>сериализация (JSON игнорирует)</li>
+                <li>публичные API</li>
+                <li>когда нужна простота</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>10. Подводные камни</h2>
+    <ul>
+        <li>❗ Не видны в JSON.stringify</li>
+        <li>❗ Не копируются через Object.assign (частично)</li>
+        <li>❗ Трудно дебажить</li>
+        <li>❗ Ложное ощущение приватности</li>
+    </ul>
+</section>
+
+<section>
+    <h2>11. Альтернативы</h2>
+    <ul>
+        <li>#private поля (классы)</li>
+        <li>WeakMap</li>
+        <li>обычные строки (если не нужна уникальность)</li>
+    </ul>
+</section>
+
+<section>
+    <h2>12. Итог</h2>
+    <ul>
+        <li>Symbol — это не просто "уникальный ключ"</li>
+        <li>Это инструмент для:</li>
+        <ul>
+            <li>изоляции</li>
+            <li>расширения языка</li>
+            <li>контроля поведения объектов</li>
+        </ul>
+    </ul>
+</section>
+
+<section>
+    <h2>13. Демонстрация (live coding)</h2>
+    <ul>
+        <li>создать iterable объект</li>
+        <li>переопределить toPrimitive</li>
+        <li>показать скрытые свойства</li>
+        <li>сравнить Symbol() vs Symbol.for()</li>
+    </ul>
+</section>
+
+<section>
+    <h2>14. Q&A / обсуждение</h2>
+    <ul>
+        <li>Когда вы бы использовали Symbol в проде?</li>
+        <li>Использовали ли в кодовой базе?</li>
+    </ul>
+</section>
         </div>
     </div>
 
