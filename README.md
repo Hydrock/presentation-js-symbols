@@ -1,39 +1,37 @@
-# Ключевое слово using в ECMAScript
+# Symbol в JavaScript
 
-Презентация о новом ключевом слове `using` в JavaScript для автоматического управления ресурсами.
+Презентация о примитивном типе Symbol в JavaScript для технической аудитории (middle+ / senior).
 
 ## Просмотр презентации
 
-🔗 **[Открыть презентацию](https://hydrock.github.io/presentation-js-using/)**
+🔗 **[Открыть презентацию](https://hydrock.github.io/presentation-js-symbols/)**
 
 ## Описание
 
-Ключевое слово `using` — это нововведение ECMAScript 2024, которое привносит детерминированное управление ресурсами в JavaScript. Аналогично `using` в C# и `with` в Python, оно гарантирует автоматическое освобождение ресурсов при выходе из области видимости.
+Symbol — это примитивный тип в JavaScript, введённый в ES6, который предоставляет уникальные идентификаторы. Он используется для создания скрытых свойств объектов, расширения поведения языка и создания внутренних API.
 
 ## Структура проекта
 
 ```
 ├── index.html              # Презентация (Reveal.js)
-├── Explanation/            # Подробные описания слайдов
-│   ├── README.md          # Общее описание
-│   ├── 01-intro.md        # Титульный слайд
-│   ├── 02-contents.md     # Содержание
-│   └── ...                # Остальные слайды
 ├── package.json           # Зависимости проекта
 └── README.md              # Этот файл
 ```
 
 ## Содержание презентации
 
-1. Что такое `using`?
-2. История появления
-3. Аналоги в других языках
-4. Зачем нужен `using`?
-5. Синтаксис и примеры
-6. Протокол Symbol.dispose
-7. Транспиляция
-8. Поддержка в браузерах и Node.js
-9. Лучшие практики
+1. Введение: зачем вообще Symbol
+2. Что такое Symbol
+3. Основные свойства Symbol
+4. Symbol как способ скрытия данных
+5. Глобальный реестр символов
+6. Встроенные символы (well-known symbols)
+7. Переопределение поведения языка
+8. Symbols в реальных библиотеках
+9. Когда использовать Symbol
+10. Подводные камни
+11. Альтернативы
+12. Итог
 
 ## Технологии
 
@@ -43,9 +41,10 @@
 
 ## Полезные ссылки
 
-- [TC39 Proposal](https://github.com/tc39/proposal-explicit-resource-management)
-- [TypeScript 5.2 Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-2.html)
-- [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/using)
+- [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol)
+- [ECMAScript 6 Specification](https://www.ecma-international.org/ecma-262/6.0/)
+- [React Source Code](https://github.com/facebook/react)
+- [Node.js Source Code](https://github.com/nodejs/node)
 
 ## Запуск локально
 
@@ -59,8 +58,8 @@ npx serve .
 
 ## Автор
 
-Презентация создана для доклада о современных возможностях JavaScript.
+Презентация создана для доклада о Symbol в JavaScript.
 
 ---
 
-📝 **Ключевой вывод**: `using` — это современный стандарт для управления ресурсами в JavaScript, который делает код безопаснее и чище.
+📝 **Ключевой вывод**: Symbol — это мощный инструмент для изоляции, расширения языка и контроля поведения объектов в JavaScript.
